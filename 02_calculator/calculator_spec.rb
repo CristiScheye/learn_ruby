@@ -7,25 +7,34 @@
 #
 # # Calculator
 #
-# you will build a simple calculator script with the following methods:
+# you will build a simple calculator script with the 
+# following methods:
 #
 # `add` takes two parameters and adds them
 #
-# `subtract` takes two parameters and subtracts the second from the first
+# `subtract` takes two parameters and subtracts 
+#  the second from the first
 #
-# `sum` takes an *array* of parameters and adds them all together
+# `sum` takes an *array* of parameters and adds 
+#  them all together
 #
 # # Warning
 #
-# You may not have enough knowledge yet to complete `sum`. You will probably
-# need to use **loops** (e.g. `while`) or **iterators** (e.g. `each`) to
+# You may not have enough knowledge yet to complete 
+# `sum`. You will probably
+# need to use **loops** (e.g. `while`) or **iterators** 
+# (e.g. `each`) to
 # get the tests to pass.
 #
 # # Bonus
 #
-# There are also some bonus exercises for when you finish the regular ones. The bonus round will help teach you test-driven *development*, not simply test-guided *learning*.
+# There are also some bonus exercises for when you finish 
+# the regular ones. The bonus round will help teach you 
+# test-driven *development*, not simply test-guided 
+# *learning*.
 #
-# Your mission, should you choose to accept it, is to write *tests* for three new methods:
+# Your mission, should you choose to accept it, is to 
+# write *tests* for three new methods:
 #
 # * `multiply` which multiplies two numbers together
 # * `power` which raises one number to the power of another number
@@ -79,21 +88,41 @@ end
 
 describe "#multiply" do
 
-  it "multiplies two numbers"
+  it "multiplies two numbers" do
+    multiply([2,5]).should == 10
+  end
 
-  it "multiplies several numbers"
+  it "multiplies several numbers" do
+    multiply([3,4,5]).should == 60
+  end
 
 end
 
 describe "#power" do
-  it "raises one number to the power of another number"
+  it "raises one number to the power of another number" do
+    power(2,5).should == 32
+  end
 end
 
 # http://en.wikipedia.org/wiki/Factorial
 describe "#factorial" do
-  it "computes the factorial of 0"
-  it "computes the factorial of 1"
-  it "computes the factorial of 2"
-  it "computes the factorial of 5"
-  it "computes the factorial of 10"
+  it "computes the factorial of 0" do
+    factorial(0).should == 1
+  end
+
+  it "computes the factorial of 1" do
+    factorial(1).should == 1
+  end
+
+  it "computes the factorial of 2" do
+    factorial(2).should == 2
+  end
+
+  it "computes the factorial of 5" do
+    factorial(5).should == 120
+  end
+
+  it "computes the factorial of 10" do
+    factorial(10).should ==  3628800
+  end
 end
