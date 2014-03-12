@@ -1,35 +1,28 @@
-def add(a,b)
-  a + b
+def add(*args)
+  args.inject(0) {|total, num| total += num }
 end
 
-def subtract(a,b)
-  a - b
+def subtract(*args)
+  args[1..-1].inject(args[0]) {|total, num| total -= num}
 end
 
-def sum(numbers)
-  total = 0
-
-  numbers.each { |val| total += val}
-
-  total
+def sum(arrr)
+  arrr.inject(0) {|total, num| total += num }
 end
 
-def multiply(numbers)
-  product = 1
-
-  numbers.each { |val| product *= val}
-
-  product
+def multiply(*args)
+  args.inject(1) {|total, num| total *= num }
 end
 
 def power(base, exp)
   base ** exp
 end
 
-def factorial(a)
-  if a == 0 || a == 1
-    1
+def factorial(num)
+  if num <= 1
+    return 1
   else
-    a * factorial(a-1)
+    result = num * factorial(num-1)
   end
+  return result
 end
