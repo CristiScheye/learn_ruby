@@ -1,35 +1,33 @@
 class Book
+  attr_writer :title
 
-
-  def initialize
-  end
-
-  def title=(title)
-    words = title.split
-
-    first_word = true
-    proper_case = words.map do |word|
-      if first_word
-        first_word = false
-        word[0].upcase + word[1..-1]
-      elsif exception?(word) 
-        word
-      else
-        word[0].upcase + word[1..-1]
-      end
-
-    end
-
-    @title = proper_case.join(' ')
-  end
+  def initialize; end
 
   def title
-    @title
+    words = @title.split(' ')
+
+    proper_case_words = words.map.with_index do |word, index|
+      if should_not_capitalize?(word) && index != 0
+        word
+      else
+        capitalize(word)
+      end
+    end
+
+    proper_case_words.join(' ')
   end
 
-  def exception?(word)
-    ['the','a','an','and','or', 'in','of','around','out'].include? word
+  def should_not_capitalize?(word)
+    articles = ['the', 'a', 'an']
+    conjunctions = ['and', 'or']
+    prepositions = ['in', 'of', 'around']
+
+    words_not_capitalized = articles + conjunctions + prepositions
+
+    words_not_capitalized.include? word
   end
 
-
+  def capitalize(word)
+    word[0].upcase +  word[1..-1]
+  end
 end
