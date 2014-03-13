@@ -6,18 +6,14 @@ class Timer
   end
 
   def time_string
-    hours = seconds / 3600
-    minutes = (seconds % 3600) / 60
-    secs = seconds % 60
+    hour = padded( seconds / 3600 )
+    min = padded( (seconds % 3600) / 60 )
+    sec = padded( seconds % 60 )
 
-    [padded(hours), padded(minutes), padded(secs)].join(':')
+    [hour, min, sec].join(':')
   end
 
-  def padded(num)
-    if num < 10
-      '0' + num.to_s
-    else
-      num.to_s
-    end
+  def padded(number)
+    number.to_s.rjust(2,'0')
   end
 end
