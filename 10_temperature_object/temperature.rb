@@ -1,33 +1,33 @@
 class Temperature
-  def initialize(temp_hash)
-    @celsius = temp_hash[:c]
-    @fahrenheit = temp_hash[:f]
-  end
 
-  def in_fahrenheit
-    ctof if @fahrenheit.nil?
-    @fahrenheit
+  def initialize(temp)
+    @fahrenheit = temp[:f]
+    @celsius = temp[:c]
   end
 
   def in_celsius
-    ftoc if @celsius.nil?
-    @celsius
+    @celsius ||= ftoc 
   end
 
+  def in_fahrenheit
+    @fahrenheit ||= ctof
+  end
+
+  # Factory Methods
   def self.from_fahrenheit(temp)
-    Temperature.new(:f => temp)
+    Temperature.new(f: temp)
   end
 
   def self.from_celsius(temp)
-    Temperature.new(:c => temp)
+    Temperature.new(c: temp)
   end
 
   def ftoc
-    @celsius = (@fahrenheit - 32.0) * 5.0 / 9.0
+    (@fahrenheit - 32.0) * 5.0 / 9.0
   end
 
   def ctof
-    @fahrenheit = @celsius * 9.0 / 5.0 + 32.0
+    (@celsius * 9.0 / 5.0) + 32.0
   end
 end
 
@@ -42,4 +42,3 @@ class Fahrenheit < Temperature
     @fahrenheit = temp
   end
 end
-
