@@ -1,12 +1,12 @@
 class Friend
-  def initialize
-  end
+  def initialize; end
 
-  def greeting(name = nil)
-    if name.nil?
-      "Hello!"
+  def greeting(name = '')
+    if name == ''
+      'Hello!'
     else
       "Hello, #{name}!"
     end
   end
+
 end
