@@ -1,68 +1,50 @@
 class RPNCalculator
-  attr_reader :numbers
 
   def initialize
     @numbers = []
   end
 
-  def push(val)
-    numbers << val
+  def push(value)
+    @numbers << value
   end
 
   def value
-    # @total = @value
-    # reset_subtotal if numbers_empty?
-    numbers.last
+    @numbers.last
   end
 
-  def reset_subtotal
-    @value = nil
-  end
-
-  def numbers_empty?
-    @numbers.size == 0
-  end
-
-  def raise_exception
-    raise "calculator is empty"
-  end
 
   def plus
-    raise_exception if numbers_empty?
-
-    num_1 = numbers.pop
-    num_2 = numbers.pop
-    numbers << num_1 + num_2
+    unless calculator_empty?
+      @numbers << (@numbers.pop + @numbers.pop)
+    end
   end
 
   def minus
-    raise_exception if numbers_empty?
-
-    num_1 = numbers.pop
-    num_2 = numbers.pop    
-    numbers << num_2 - num_1
-  end
-
-  def times
-    raise_exception if numbers_empty?
-
-    num_1 = numbers.pop
-    num_2 = numbers.pop   
-    numbers << num_2.to_f * num_1.to_f
+    unless calculator_empty?
+      @numbers << (-@numbers.pop + @numbers.pop) #subtract left from right in array
+    end
   end
 
   def divide
-    raise_exception if numbers_empty?
+    unless calculator_empty?
+      @numbers << (1 / @numbers.pop.to_f * @numbers.pop.to_f) #divide left  by right in array
+    end
+  end
 
-    num_1 = numbers.pop
-    num_2 = numbers.pop   
-    numbers << num_2.to_f / num_1.to_f
+  def times
+    unless calculator_empty?
+      @numbers << (@numbers.pop * @numbers.pop)
+    end
+  end
+
+  def calculator_empty?
+    raise 'calculator is empty' if @numbers.size == 0
   end
 
   def tokens(string)
-    arr = string.split
-    arr.map do |char|
-      if /\d/ === char
+    chars = string.split(' ')
+    chars.map! do |char|
+      if /\d/ === char 
         char.to_i
       else
         char.to_sym
@@ -71,24 +53,18 @@ class RPNCalculator
   end
 
   def evaluate(string)
-    items = tokens(string)
-    items.each do |item|
-      if item.is_a? Integer
-        push(item)
+    tokens(string).each do |token|
+      if token.is_a? Integer
+        push(token)
       else
-        case item
-        when :+ then plus
-        when :- then minus
-        when :* then times
-        when :/ then divide
+        case token
+          when :+ then plus
+          when :- then minus
+          when :* then times
+          when :/ then divide
         end
       end
     end
     value
   end
-
 end
-
-
-
-
