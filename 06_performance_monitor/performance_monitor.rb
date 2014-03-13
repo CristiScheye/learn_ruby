@@ -1,11 +1,13 @@
-def measure(num_repeats = 1)
-  run_time = 0
-  num_repeats.times do 
+def measure(rep_count = 1)
+  total_time = 0
+
+  rep_count.times do
     start = Time.now
     yield 
     stop = Time.now
-    run_time += stop - start
+
+    total_time += stop - start
   end
 
-  run_time / num_repeats.to_f
+  total_time / rep_count  
 end
